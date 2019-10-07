@@ -8,9 +8,9 @@ const Navigation = () => {
 	const cart = useContext(CartContext);
 	return (
 		<div className="navigation">
-			<NavLink to="/">Products</NavLink>
+			<NavLink to="/">PRODUCTS</NavLink>
 			<NavLink to="/cart">
-				CART <span>{cart.length}</span>
+				cCART <span>{cart.length}</span>
 			</NavLink>
 		</div>
 	);
