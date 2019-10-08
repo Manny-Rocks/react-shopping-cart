@@ -5,12 +5,12 @@ import { useContext } from 'react';
 
 
 const Navigation = () => {
-	const cart = useContext(CartContext);
-	return (
+	const { cart } = useContext(CartContext);
+		return (
 		<div className="navigation">
 			<NavLink to="/">PRODUCTS</NavLink>
 			<NavLink to="/cart">
-				cCART <span>{cart.length}</span>
+				CART <span>{cart.length}</span>
 			</NavLink>
 		</div>
 	);
