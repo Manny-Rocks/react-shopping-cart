@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import data from './data';
+import { ProductContext } from './contextsStuff/ProductContext';
+import { CartContext } from './contextsStuff/CartContext';
+
 
 // Components
 import Navigation from './components/Navigation';
@@ -14,8 +17,16 @@ function App() {
 	const addItem = item => {
 		setCart([...cart, item]);
 	};
+	
+	const removeItem = id => {
+		// console.log(`clicked remove item on ${id}`)
+		const newCart = cart.filter(entry => entry.id !== id)
+		setCart(newCart)
+	}
 
 	return (
+		<ProductContext.Provider value={{ products, addItem }}>
+			<CartContext.Provider value={{cart,removeItem}}>
 		<div className="App">
 			<Navigation cart={cart} />
 
@@ -25,17 +36,17 @@ function App() {
 				path="/"
 				render={() => (
 					<Products
-						products={products}
-						addItem={addItem}
+						products={products} addItem={addItem}
 					/>
 				)}
 			/>
 
 			<Route
-				path="/cart"
-				render={() => <ShoppingCart cart={cart} />}
+				path="/cart" render={() => <ShoppingCart cart={cart} />}
 			/>
 		</div>
+		</CartContext.Provider>
+		</ProductContext.Provider>
 	);
 }
 
